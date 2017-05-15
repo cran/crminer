@@ -9,10 +9,6 @@
 #' and other publisher specific fixes to URLs
 #' @param type (character) One of 'xml' (default), 'html', 'plain', 'pdf',
 #' 'unspecified'
-#' @param path (character) Path to store pdfs in. By default we use
-#' `paste0(rappdirs::user_cache_dir(), "/crminer")`, but you can
-#' set this directory to something different. Ignored unless getting
-#' pdf
 #' @param overwrite (logical) Overwrite file if it exists already?
 #' Default: `TRUE`
 #' @param read (logical) If reading a pdf, this toggles whether we extract
@@ -28,10 +24,32 @@
 #' mime type 'unspecified' for the full text links (for some Wiley dois
 #' for example). This parameter overrides the mime type to be `type`.
 #' @param ... Named curl parameters passed on to [crul::HttpClient()], see
-#' `?curl::curl_options` for available curl options
-#' @template deets
+#' [curl::curl_options()] for available curl options
+#'
+#' @details Note that this function is not vectorized. To do many requests
+#' use a for/while loop or lapply family calls, or similar.
+#'
+#' Note that some links returned will not in fact lead you to full text
+#' content as you would understandbly think and expect. That is, if you
+#' use the `filter` parameter with e.g., [rcrossref::cr_works()]
+#' and filter to only full text content, some links may actually give back
+#' only metadata for an article. Elsevier is perhaps the worst offender,
+#' for one because they have a lot of entries in Crossref TDM, but most
+#' of the links that are apparently full text are not in facct full text,
+#' but only metadata.
+#'
+#' Check out [auth] for details on authentication.
+#'
+#' @section Caching:
+#' By default we use
+#' `paste0(rappdirs::user_cache_dir(), "/crminer")`, but you can
+#' set this directory to something different. Ignored unless getting
+#' pdf. See [crm_cache] for caching details.
 #'
 #' @examples \dontrun{
+#' # set a temp dir. cache path
+#' crm_cache$cache_path_set(path = "crminer", type = "tempdir")
+#'
 #' ## pensoft
 #' data(dois_pensoft)
 #' (links <- crm_links(dois_pensoft[1], "all"))
@@ -109,21 +127,20 @@
 #' # tmp <- crm_links("10.1113/jp272944", "all")
 #' # crm_text(tmp, type = "pdf", cache=FALSE)
 #' }
-crm_text <- function(url, type = 'xml', path = cr_cache_path(),
-                     overwrite = TRUE, read = TRUE, cache = FALSE,
-                     overwrite_unspecified = FALSE, ...) {
+crm_text <- function(url, type = 'xml', overwrite = TRUE, read = TRUE,
+                     cache = FALSE, overwrite_unspecified = FALSE, ...) {
   UseMethod("crm_text")
 }
 
 #' @export
-crm_text.default <- function(url, type = 'xml', path = cr_cache_path(),
+crm_text.default <- function(url, type = 'xml',
                              overwrite = TRUE, read = TRUE, cache = FALSE,
                              overwrite_unspecified = FALSE, ...) {
   stop("no 'crm_text' method for ", class(url), call. = FALSE)
 }
 
 #' @export
-crm_text.tdmurl <- function(url, type = 'xml', path = cr_cache_path(),
+crm_text.tdmurl <- function(url, type = 'xml',
                             overwrite = TRUE, read = TRUE, cache = FALSE,
                             overwrite_unspecified = FALSE, ...) {
 
@@ -134,13 +151,13 @@ crm_text.tdmurl <- function(url, type = 'xml', path = cr_cache_path(),
     xml = getTEXT(get_url(url, 'xml'), type, auth),
     plain = getTEXT(get_url(url, 'xml'), type, auth, ...),
     html = getTEXT(get_url(url, 'html'), type, auth, ...),
-    pdf = getPDF(url = get_url(url, 'pdf'), path, auth, overwrite, type,
+    pdf = getPDF(url = get_url(url, 'pdf'), auth, overwrite, type,
                  read, cache, ...)
   )
 }
 
 #' @export
-crm_text.list <- function(url, type = 'xml', path = cr_cache_path(),
+crm_text.list <- function(url, type = 'xml',
                          overwrite = TRUE, read = TRUE, cache = FALSE,
                          overwrite_unspecified = FALSE, ...) {
   if (!all(vapply(url, class, "", USE.NAMES = FALSE) == "tdmurl")) {
@@ -152,7 +169,7 @@ crm_text.list <- function(url, type = 'xml', path = cr_cache_path(),
   }
   url <- maybe_overwrite_unspecified(overwrite_unspecified, url, type)
   if (is.null(url[[type]])) stop('no links for type ', type)
-  crm_text(url[[type]], type = type, path = path, overwrite = overwrite,
+  crm_text(url[[type]], type = type, overwrite = overwrite,
            read = read, cache = cache,
            overwrite_unspecified = overwrite_unspecified, ...)
 }
