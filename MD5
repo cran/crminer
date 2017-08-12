@@ -1,7 +1,7 @@
-c0acc5b4e6e9f376834b784d0c20b593 *DESCRIPTION
+9d12cd5725b7e6dcb3be742a36902a33 *DESCRIPTION
 c5af52351472a750055a760a8924ce71 *LICENSE
 518fee1bc06899f17a511db6116bc5f9 *NAMESPACE
-bdb5788a66657aefee180246bf9a806e *NEWS.md
+1f74f338a2a4f72511bb52d2a84d41d4 *NEWS.md
 4dba472f92747028d25d62430b09a576 *R/as_tdmurl.R
 6aa3aca6539702b6b7be19f14f99ecad *R/auth.R
 79c21fbe6312fd67fc0c340bbb6801a5 *R/caching.R
@@ -16,7 +16,7 @@ ecd2de2ff032f9ea4c86edc9a5ba9cdf *R/crminer-package.R
 ba06fe799cd4eabf01f654cd4b9eaf49 *R/on_load.R
 34161e5519d4e9a757d78a47a99d1445 *R/utils.R
 4fbd0d27bf97b7d2bb1b9a5b2ccfdda5 *R/zzz.R
-581e4f15bf340a7f7710f27b7cacc48e *README.md
+c73c21e5543981950d5389f5ebd787e9 *README.md
 04ddf5de91d35fdf1597eb03273f0ace *data/dois_crminer.rda
 2ac6bf6e660e1e98b513d440fb8a31c3 *data/dois_crminer_ccby3.rda
 0d187d09787c8e5fb163b291b3a59dbd *data/dois_elsevier.rda
@@ -47,7 +47,7 @@ f39d7f8e2ee24fb95c5d6e148e4b1a9c *man/dois_wiley.Rd
 e3cad16cf77ee42ad3ad7812c9752786 *tests/testthat/test-caching.R
 43a32467e4da4962a2431cd8fea3def2 *tests/testthat/test-crm_extract.R
 5e19e801ad9f3968499988966b4a539d *tests/testthat/test-crm_html.R
-8d1b976234d112ae5bdccb9ec2e91694 *tests/testthat/test-crm_links.R
+482c7551f35d47f7d8d3e5c7291a8517 *tests/testthat/test-crm_links.R
 489a4dc2af6a65a5b91e6cea597c3d7e *tests/testthat/test-crm_pdf.R
 3e887bb8a6f236fd1a1d9ba9262da91b *tests/testthat/test-crm_plain.R
 225e56bd6bb3ec249e87c230df3f2dc3 *tests/testthat/test-crm_text.R
