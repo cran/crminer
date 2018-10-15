@@ -6,11 +6,14 @@
 \alias{as_tdmurl.character}
 \title{Coerce a url to a tdmurl with a specific type}
 \usage{
-as_tdmurl(url, type, doi)
+as_tdmurl(url, type, doi = NULL, member = NULL,
+  intended_application = NULL)
 
-\method{as_tdmurl}{tdmurl}(url, type, doi)
+\method{as_tdmurl}{tdmurl}(url, type, doi = NULL, member = NULL,
+  intended_application = NULL)
 
-\method{as_tdmurl}{character}(url, type, doi = NULL)
+\method{as_tdmurl}{character}(url, type, doi = NULL, member = NULL,
+  intended_application = NULL)
 }
 \arguments{
 \item{url}{(character) A URL.}
@@ -19,6 +22,11 @@ as_tdmurl(url, type, doi)
 'unspecified', or 'all'}
 
 \item{doi}{(character) A DOI, optional, default: \code{NULL}}
+
+\item{member}{(character) Crossref member id. optional}
+
+\item{intended_application}{(character) intended application string,
+optional}
 }
 \description{
 A tmd url is just a URL with some attributes to make it easier

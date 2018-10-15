@@ -3,6 +3,7 @@ crminer
 
 
 
+[![cran checks](https://cranchecks.info/badges/worst/crminer)](https://cranchecks.info/pkgs/crminer)
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 [![Build Status](https://travis-ci.org/ropensci/crminer.svg?branch=master)](https://travis-ci.org/ropensci/crminer)
 [![codecov.io](https://codecov.io/github/ropensci/crminer/coverage.svg?branch=master)](https://codecov.io/github/ropensci/crminer?branch=master)
@@ -175,7 +176,7 @@ Then get pdf and text is extracted
 ```
 
 ```
-#> <document>/Users/sacmac/Library/Caches/R/crminer/10445.pdf
+#> <document>/Users/sckott/Library/Caches/R/crminer/10445.pdf
 #>   Pages: 28
 #>   No. characters: 73844
 #>   Created: 2106-02-07
@@ -207,7 +208,7 @@ path <- system.file("examples", "MairChamberlain2014RJournal.pdf", package = "cr
 ```
 
 ```
-#> <document>/Users/sacmac/github/ropensci/crminer/inst/examples/MairChamberlain2014RJournal.pdf
+#> <document>/Library/Frameworks/R.framework/Versions/3.5/Resources/library/crminer/examples/MairChamberlain2014RJournal.pdf
 #>   Pages: 4
 #>   No. characters: 17358
 #>   Created: 2014-07-29
@@ -274,6 +275,6 @@ cat(substring(res$text[[1]], 1, 300))
 * Please [report any issues or bugs](https://github.com/ropensci/crminer/issues).
 * License: MIT
 * Get citation information for `crminer` in R doing `citation(package = 'crminer')`
-* Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
+* Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
 
 [![rofooter](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
