@@ -4,24 +4,23 @@ crminer
 
 
 [![cran checks](https://cranchecks.info/badges/worst/crminer)](https://cranchecks.info/pkgs/crminer)
-[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Build Status](https://travis-ci.org/ropensci/crminer.svg?branch=master)](https://travis-ci.org/ropensci/crminer)
 [![codecov.io](https://codecov.io/github/ropensci/crminer/coverage.svg?branch=master)](https://codecov.io/github/ropensci/crminer?branch=master)
-[![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/crminer)](https://github.com/metacran/cranlogs.app)
-[![cran version](http://www.r-pkg.org/badges/version/crminer)](https://cran.r-project.org/package=crminer)
+[![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/crminer)](https://github.com/metacran/cranlogs.app)
+[![cran version](https://www.r-pkg.org/badges/version/crminer)](https://cran.r-project.org/package=crminer)
 
-[Crossref](https://www.crossref.org/) is a not-for-profit membership organization for
+Crossref (https://www.crossref.org/) is a not-for-profit membership organization for
 scholarly publishing. For our purposes here, they provide a nice
-[search API](https://github.com/CrossRef/rest-api-doc/blob/master/rest_api.md)
-for metadata for scholarly works.
+search API (https://github.com/CrossRef/rest-api-doc) for metadata for scholarly works
 
 Publishers can optionally provide links in metadata they provide to Crossref for
 full text of the work, but that data is often missing, although coverage of links
 does seem to increase through time. Find out more about it
-at <http://tdmsupport.crossref.org/>
+at https://support.crossref.org/hc/en-us/articles/215750183-Crossref-Text-and-Data-Mining-Services
 
 See <https://github.com/ropensci/rcrossref> for a full fledged R client
-for working with the [Crossref search API](https://github.com/CrossRef/rest-api-doc/blob/master/rest_api.md).
+for working with the Crossref search API (https://github.com/CrossRef/rest-api-doc)
 
 `crminer` focuses only on getting the user full text via the Crossref
 search API. That is, this client depends on the full text links provided
@@ -54,9 +53,9 @@ publishers make up a lot of the papers out there and a lot of the
 links on the Crossref API.
 
 There's a how to guide for Crossref TDM at
-<http://tdmsupport.crossref.org/researchers/>.
-Get your Crossref TDM token by registering at
-<https://apps.crossref.org/clickthrough/researchers>.
+https://support.crossref.org/hc/en-us/articles/214298826-Text-and-Data-Mining-for-Researchers
+
+Get your Crossref TDM token by registering at https://apps.crossref.org/clickthrough/researchers
 Save the token in your `.Renviron` file with a new row like
 `CROSSREF_TDM=your key`. We will read that key in for you - it's best
 this way rather than passing in a key via a parameter - since you might
@@ -83,11 +82,39 @@ to Elsevier content, Elsevier doesn't necessarily have the fence
 turned off - if its not off, you can't get through - if it's off, you can.
 If you have the right token and you are sure you're on the right
 IP address, this could be the problem for your lack of access. If that happens
-get in touch with me at <mailto:scott@ropensci.org> and i'll try to sort it out.
+get in touch with me at (myrmecocystus@gmail.com) and i'll try to sort it out.
 
 ### HELP!
 
 If you're having trouble with any of this [open an issue](https://github.com/ropensci/crminer/issues)
+
+### Just crm_links function: Register for the Polite Pool
+
+`crm_links()` uses the Crossref API (https://github.com/CrossRef/rest-api-doc).
+
+You should send your email address with your `crm_links()` requests. This has the advantage
+that queries are placed in the polite pool of servers. Including your email address is good
+practice as described in the Crossref documentation under
+"Good manners" at https://github.com/CrossRef/rest-api-doc
+
+Details on how to register your email in a call can be found at `?rcrossref-package`. To pass
+your email address to Crossref, simply store it as an environment variable in .Renviron like this:
+
+Open file: 
+
+```r
+file.edit("~/.Renviron")
+```
+
+Add email address to be shared with Crossref `crossref_email=name@example.com` or 
+`CROSSREF_EMAIL=name@example.com` (env var as lower or upper case, both work)
+
+Save the file and restart your R session
+
+To stop sharing your email when using rcrossref simply delete it from your .Renviron file.
+
+To be sure your in the polite pool use curl verbose by e.g., 
+`crm_links(doi = "10.5555/515151", verbose = TRUE)`
 
 ### Help in package
 
@@ -117,7 +144,7 @@ Development version
 
 
 ```r
-devtools::install_github("ropensci/crminer")
+remotes::install_github("ropensci/crminer")
 ```
 
 
@@ -208,7 +235,7 @@ path <- system.file("examples", "MairChamberlain2014RJournal.pdf", package = "cr
 ```
 
 ```
-#> <document>/Library/Frameworks/R.framework/Versions/3.5/Resources/library/crminer/examples/MairChamberlain2014RJournal.pdf
+#> <document>/Library/Frameworks/R.framework/Versions/3.6/Resources/library/crminer/examples/MairChamberlain2014RJournal.pdf
 #>   Pages: 4
 #>   No. characters: 17358
 #>   Created: 2014-07-29
@@ -275,6 +302,8 @@ cat(substring(res$text[[1]], 1, 300))
 * Please [report any issues or bugs](https://github.com/ropensci/crminer/issues).
 * License: MIT
 * Get citation information for `crminer` in R doing `citation(package = 'crminer')`
-* Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+* Please note that this project is released with a [Contributor Code of Conduct][coc]. By participating in this project you agree to abide by its terms.
 
 [![rofooter](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
+
+[coc]: https://github.com/ropensci/crminer/blob/master/CODE_OF_CONDUCT.md

@@ -4,9 +4,9 @@
 \name{crminer-package}
 \alias{crminer-package}
 \alias{crminer}
-\title{crminer - Crossref text miner}
+\title{crminer}
 \description{
-crminer - Crossref text miner
+Crossref text miner
 }
 \section{Package API (functions)}{
 
