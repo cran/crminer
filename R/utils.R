@@ -2,6 +2,8 @@ get_url <- function(a, b){
   url <- if (inherits(a, "tdmurl")) a[[1]] else a[[b]]
   if (grepl("pensoft", url)) {
     url
+  } else if (attr(a, "member") == "78") {
+    url
   } else {
     sub("\\?.+", "", url)
   }
@@ -20,10 +22,16 @@ pick_type <- function(x, z) {
 }
 
 cr_auth <- function(url, type) {
+  wiley_cambridge <- function(type) {
+    list(
+      `CR-Clickthrough-Client-Token` = Sys.getenv("CROSSREF_TDM"),
+      Accept = type
+    )
+  }
   mem <- attr(url, "member")
   if (is.null(mem)) return(list())
   mem_num <- basename(mem)
-  if (mem_num %in% c(78, 263, 311)) {
+  if (mem_num %in% c(78, 263, 311, 286)) {
     type <- switch(
       type,
       xml = "text/xml",
@@ -33,20 +41,16 @@ cr_auth <- function(url, type) {
     )
     switch(
       mem_num,
-      `78` = {
+      `78` = { # elsevier
         key <- Sys.getenv("CROSSREF_TDM")
         list(`CR-Clickthrough-Client-Token` = key, Accept = type)
       },
-      `263` = {
+      `263` = { # IEEE
         key <- Sys.getenv("CROSSREF_TDM")
         list(`CR-TDM-Client_Token` = key, Accept = type)
       },
-      `311` = {
-        list(
-          `CR-Clickthrough-Client-Token` = Sys.getenv("CROSSREF_TDM"),
-          Accept = type
-        )
-      }
+      `311` = wiley_cambridge(type), # wiley
+      `286` = wiley_cambridge(type) # cambridge
     )
   } else {
     return(list())
@@ -65,7 +69,7 @@ getTEXT <- function(x, type, auth, ...){
   )
 }
 
-getPDF <- function(url, auth, overwrite, type, read, cache = FALSE, ...) {
+getPDF <- function(url, auth, overwrite, type, read, doi, cache = FALSE, ...) {
   crm_cache$mkdir()
   # if (!file.exists(path)) {
   #   dir.create(path, showWarnings = FALSE, recursive = TRUE)
@@ -73,7 +77,6 @@ getPDF <- function(url, auth, overwrite, type, read, cache = FALSE, ...) {
 
   # pensoft special handling
   if (grepl("pensoft", url[[1]])) {
-    doi <- attr(url, "doi")
     if (is.null(doi)) {
       tmp <- strsplit(url, "=")[[1]]
       doi <- tmp[length(tmp)]
@@ -81,10 +84,11 @@ getPDF <- function(url, auth, overwrite, type, read, cache = FALSE, ...) {
     filepath <- file.path(crm_cache$cache_path_get(),
                           paste0(sub("/", ".", doi), ".pdf"))
   } else {
-    ff <- if (!grepl(type, basename(url))) {
-      paste0(basename(url), ".", type)
+    burl <- sub("\\?.+", "", url)
+    ff <- if (!grepl(type, basename(burl))) {
+      paste0(basename(burl), ".", type)
     } else {
-      basename(url)
+      basename(burl)
     }
     filepath <- file.path(crm_cache$cache_path_get(), ff)
   }
