@@ -8,12 +8,12 @@ skip_on_cran()
 crm_cache$cache_path_set(path = "crminer", type = "tempdir")
 
 test_that("crm_text works: pdf", {
-  vcr::use_cassette("crm_text_type_pdf", {
+  vcr::use_cassette("crm_text_type_pdf_prep", {
     links <- crm_links("10.7717/peerj.8746", "pdf")
-    pdf_read <- suppressMessages(crm_text(links, "pdf", read = FALSE,
-                                          verbose = FALSE))
-    pdf <- suppressMessages(crm_text(links, "pdf", verbose = FALSE))
   })
+  pdf_read <- suppressMessages(crm_text(links, "pdf", read = FALSE,
+                                        verbose = FALSE))
+  pdf <- suppressMessages(crm_text(links, "pdf", verbose = FALSE))
 
   expect_is(pdf_read, "character")
   expect_is(pdf, "crm_pdf")
@@ -35,16 +35,16 @@ test_that("crm_text fails well", {
                "'type' must be one of xml, plain, html, or pdf")
 })
 
-test_that("crm_text with pdf works for 'unspecified' = TRUE",{
-  skip_if_not(Sys.getenv("CROSSREF_TDM") != "",
-              "Needs 'Sys.setenv(CROSSREF_TDM = \"your-key\")' to be set.")
-  vcr::use_cassette("crm_text_pdf_unspecified_true", {
-    links <- crm_links("10.2903/j.efsa.2014.3550", type = "all")
-    res <- suppressMessages(crm_text(links, type = "pdf",
-                                     overwrite_unspecified = TRUE))
-  })
-  expect_equal(res$info$pages, 11)
-})
+# test_that("crm_text with pdf works for 'unspecified' = TRUE",{
+  # skip_if_not(Sys.getenv("CROSSREF_TDM") != "",
+  #             "Needs 'Sys.setenv(CROSSREF_TDM = \"your-key\")' to be set.")
+  # vcr::use_cassette("crm_text_pdf_unspecified_true", {
+    # links <- crm_links("10.2903/j.efsa.2014.3550", type = "all")
+    # res <- suppressMessages(crm_text(links, type = "pdf",
+    #                                  overwrite_unspecified = TRUE))
+  # })
+  # expect_is(res$info, "list")
+# })
 
 test_that("crm_text with pdf fails for 'unspecified' = FALSE",{
   vcr::use_cassette("crm_text_pdf_unspecified_false", {
@@ -53,3 +53,34 @@ test_that("crm_text with pdf fails for 'unspecified' = FALSE",{
   expect_error(crm_text(links, type = "pdf", overwrite_unspecified = FALSE),
               "no links for type pdf")
 })
+
+test_that("crm_text works w/ elsevier DOI tranferred from another publisher",{
+  skip_on_cran()
+  vcr::use_cassette("crm_text_plain_elsevier_doi_transfer_prep", {
+    x <- crm_links("10.1016/j.actao.2019.01.006")
+  })
+
+  skip_on_ci() # no elsevier access
+  out <- crm_text(x, "plain")
+  expect_is(out, "character")
+  expect_true(any(grepl("10.1016/j.actao.2019.01.006", out)))
+  # expect_true(any(grepl("Directors of Southern Africa", out)))
+})
+
+# test_that("ocr parameter", {
+#   skip_on_cran()
+#   skip_on_travis()
+#   skip_on_appveyor()
+#
+#   # path <- system.file("examples", "S0022053183710665.pdf",
+#   #   package = "crminer")
+#   doi <- '10.1006/jeth.1993.1066'
+#   z <- crm_links(doi)
+#   ocr_false <- crm_text(z, "pdf", try_ocr = FALSE)
+#   expect_is(ocr_false, "crm_pdf")
+#   expect_true(!all(nzchar(ocr_false$text)))
+#
+#   ocr_true <- crm_text(z, "pdf", try_ocr = TRUE)
+#   expect_is(ocr_true, "crm_pdf")
+#   expect_true(all(nzchar(ocr_true$text)))
+# })

@@ -15,12 +15,13 @@
 #' but only metadata.
 #'
 #' Check out [auth] for details on authentication.
+#' @inheritSection crm_text User-agent
 #' @examples \dontrun{
 #' link <- crm_links("10.1016/j.physletb.2010.10.049", "plain")
 #' crm_plain(link)
 #'
 #' # another eg, which requires Crossref TDM authentication, see ?auth
-#' link <- crm_links("10.1016/j.funeco.2010.11.003", "plain")
+#' link <- crm_links(dois_elsevier[3], "plain")
 #' # crm_plain(link)
 #' }
 crm_plain <- function(url, overwrite_unspecified=FALSE, ...) {
@@ -35,12 +36,12 @@ crm_plain.default <- function(url, overwrite_unspecified = FALSE, ...) {
 #' @export
 crm_plain.tdmurl <- function(url, overwrite_unspecified = FALSE, ...) {
   assert(overwrite_unspecified, "logical")
-
   url <- maybe_overwrite_unspecified(overwrite_unspecified, url, "plain")
   if (is.null(url$plain[[1]])) {
     stop("no plain text link found", call. = FALSE)
   }
-  getTEXT(url$plain[[1]], "plain", cr_auth(url, 'plain'), ...)
+  getTEXT(url$plain[[1]], cr_auth(url, 'plain'), "txt", attr(url, "doi"),
+    ...)
 }
 
 #' @export

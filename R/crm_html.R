@@ -15,6 +15,7 @@
 #' but only metadata.
 #'
 #' Check out [auth] for details on authentication.
+#' @inheritSection crm_text User-agent
 #' @examples \dontrun{
 #' link <- crm_links("10.7717/peerj.1545", "html")
 #' crm_html(link)
@@ -41,7 +42,8 @@ crm_html.tdmurl <- function(url, overwrite_unspecified = FALSE, ...) {
   if (is.null(url$html[[1]])) {
     stop("no html text link found", call. = FALSE)
   }
-  getTEXT(url$html[[1]], "html", cr_auth(url, 'html'), ...)
+  getTEXT(url$html[[1]], cr_auth(url, 'html'), "html", attr(url, "doi"),
+    ...)
 }
 
 #' @export

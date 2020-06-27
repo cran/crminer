@@ -1,0 +1,55 @@
+http_interactions:
+- request:
+    method: get
+    uri: https://api.crossref.org/works/10.1016/j.actao.2019.01.006
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+      User-Agent: r-curl/4.3 rOpenSci(crul/%s)0.9.2.92 rOpenSci(rcrossref/1.0.0.92)
+        (mailto:myrmecocystus@gmail.com)
+      X-USER-AGENT: r-curl/4.3 rOpenSci(crul/%s)0.9.2.92 rOpenSci(rcrossref/1.0.0.92)
+        (mailto:myrmecocystus@gmail.com)
+  response:
+    status:
+      status_code: '200'
+      message: OK
+      explanation: Request fulfilled, document follows
+    headers:
+      status: HTTP/1.1 200 OK
+      content-type: application/json;charset=UTF-8
+      vary: Accept
+      access-control-allow-origin: '*'
+      access-control-allow-headers: X-Requested-With
+      content-length: '3828'
+      server: http-kit
+      date: Fri, 26 Jun 2020 01:29:49 GMT
+      x-rate-limit-limit: '50'
+      x-rate-limit-interval: 1s
+      connection: close
+    body:
+      encoding: UTF-8
+      file: no
+      string: '{"status":"ok","message-type":"work","message-version":"1.0.0","message":{"indexed":{"date-parts":[[2020,6,5]],"date-time":"2020-06-05T13:46:20Z","timestamp":1591364780275},"reference-count":69,"publisher":"Elsevier
+        BV","license":[{"URL":"https:\/\/www.elsevier.com\/tdm\/userlicense\/1.0\/","start":{"date-parts":[[2019,2,1]],"date-time":"2019-02-01T00:00:00Z","timestamp":1548979200000},"delay-in-days":0,"content-version":"tdm"},{"URL":"http:\/\/creativecommons.org\/licenses\/by\/4.0\/","start":{"date-parts":[[2019,2,12]],"date-time":"2019-02-12T00:00:00Z","timestamp":1549929600000},"delay-in-days":11,"content-version":"vor"}],"funder":[{"DOI":"10.13039\/100015539","name":"Australian
+        Government","doi-asserted-by":"crossref","award":[]},{"name":"Terrestrial
+        Ecosystem Research Network","award":[]},{"name":"National Collaborative Research
+        Infrastructure Strategy","award":[]}],"content-domain":{"domain":["elsevier.com","sciencedirect.com"],"crossmark-restriction":true},"short-container-title":["Acta
+        Oecologica"],"published-print":{"date-parts":[[2019,2]]},"DOI":"10.1016\/j.actao.2019.01.006","type":"journal-article","created":{"date-parts":[[2019,2,13]],"date-time":"2019-02-13T23:56:48Z","timestamp":1550102208000},"page":"74-85","update-policy":"http:\/\/dx.doi.org\/10.1016\/elsevier_cm_policy","source":"Crossref","is-referenced-by-count":4,"title":["Consistent
+        sorting but contrasting transition zones in plant communities along bioclimatic
+        gradients"],"prefix":"10.1016","volume":"95","author":[{"given":"Greg R.","family":"Guerin","sequence":"first","affiliation":[]},{"given":"Alan
+        N.","family":"Andersen","sequence":"additional","affiliation":[]},{"given":"Maurizio","family":"Rossetto","sequence":"additional","affiliation":[]},{"given":"Stephen","family":"van
+        Leeuwen","sequence":"additional","affiliation":[]},{"ORCID":"http:\/\/orcid.org\/0000-0002-7197-5409","authenticated-orcid":false,"given":"Margaret","family":"Byrne","sequence":"additional","affiliation":[]},{"given":"Ben","family":"Sparrow","sequence":"additional","affiliation":[]},{"given":"Michelle","family":"Rodrigo","sequence":"additional","affiliation":[]},{"given":"Andrew
+        J.","family":"Lowe","sequence":"additional","affiliation":[]}],"member":"78","container-title":["Acta
+        Oecologica"],"original-title":[],"language":"en","link":[{"URL":"https:\/\/api.elsevier.com\/content\/article\/PII:S1146609X18302236?httpAccept=text\/xml","content-type":"text\/xml","content-version":"vor","intended-application":"text-mining"},{"URL":"https:\/\/api.elsevier.com\/content\/article\/PII:S1146609X18302236?httpAccept=text\/plain","content-type":"text\/plain","content-version":"vor","intended-application":"text-mining"}],"deposited":{"date-parts":[[2020,5,20]],"date-time":"2020-05-20T23:07:01Z","timestamp":1590016021000},"score":1.0,"subtitle":[],"short-title":[],"issued":{"date-parts":[[2019,2]]},"references-count":69,"alternative-id":["S1146609X18302236"],"URL":"http:\/\/dx.doi.org\/10.1016\/j.actao.2019.01.006","relation":{},"ISSN":["1146-609X"],"issn-type":[{"value":"1146-609X","type":"print"}],"subject":["Ecology,
+        Evolution, Behavior and Systematics","Nature and Landscape Conservation"],"assertion":[{"value":"Elsevier","name":"publisher","label":"This
+        article is maintained by"},{"value":"Consistent sorting but contrasting transition
+        zones in plant communities along bioclimatic gradients","name":"articletitle","label":"Article
+        Title"},{"value":"Acta Oecologica","name":"journaltitle","label":"Journal
+        Title"},{"value":"https:\/\/doi.org\/10.1016\/j.actao.2019.01.006","name":"articlelink","label":"CrossRef
+        DOI link to publisher maintained version"},{"value":"article","name":"content_type","label":"Content
+        Type"},{"value":"\u00a9 2019 The Authors. Published by Elsevier Masson SAS.","name":"copyright","label":"Copyright"}]}}'
+  recorded_at: 2020-06-26 01:29:49 GMT
+  recorded_with: vcr/0.5.4, webmockr/0.6.2

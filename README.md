@@ -5,8 +5,7 @@ crminer
 
 [![cran checks](https://cranchecks.info/badges/worst/crminer)](https://cranchecks.info/pkgs/crminer)
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![Build Status](https://travis-ci.org/ropensci/crminer.svg?branch=master)](https://travis-ci.org/ropensci/crminer)
-[![Build status](https://ci.appveyor.com/api/projects/status/l7vx57pjal2s7f0i?svg=true)](https://ci.appveyor.com/project/sckott/crminer)
+[![R-check](https://github.com/ropensci/crminer/workflows/R-check/badge.svg)](https://github.com/ropensci/crminer/actions/)
 [![codecov.io](https://codecov.io/github/ropensci/crminer/coverage.svg?branch=master)](https://codecov.io/github/ropensci/crminer?branch=master)
 [![rstudio mirror downloads](https://cranlogs.r-pkg.org/badges/crminer)](https://github.com/metacran/cranlogs.app)
 [![cran version](https://www.r-pkg.org/badges/version/crminer)](https://cran.r-project.org/package=crminer)
@@ -18,7 +17,7 @@ search API (https://github.com/CrossRef/rest-api-doc) for metadata for scholarly
 Publishers can optionally provide links in metadata they provide to Crossref for
 full text of the work, but that data is often missing, although coverage of links
 does seem to increase through time. Find out more about it
-at https://support.crossref.org/hc/en-us/articles/215750183-Crossref-Text-and-Data-Mining-Services
+at https://www.crossref.org/education/retrieve-metadata/rest-api/providing-full-text-links-to-tdm-tools/
 
 See <https://github.com/ropensci/rcrossref> for a full fledged R client
 for working with the Crossref search API (https://github.com/CrossRef/rest-api-doc)
@@ -193,7 +192,7 @@ Get PDF full text links with `crm_links()`
 
 
 ```r
-links <- lapply(dois_pensoft[1:3], crm_links, type = "pdf")
+links <- lapply(dois_hindawi[1:3], crm_links, type = "pdf")
 ```
 
 Then get pdf and text is extracted
@@ -204,10 +203,8 @@ Then get pdf and text is extracted
 ```
 
 ```
-#> <document>/Users/sckott/Library/Caches/R/crminer/10445.pdf
-#>   Pages: 28
-#>   No. characters: 73844
-#>   Created: 2106-02-07
+#> <document>/Users/sckott/Library/Caches/R/crminer/598193.txt
+#>   No. characters: 69809
 ```
 
 
@@ -216,11 +213,7 @@ cat(substring(res$text[[1]], 1, 300))
 ```
 
 ```
-#>                                       Research Ideas and Outcomes 2: e10445
-#>                                       doi: 10.3897/rio.2.e10445
-#>                                                           Project Report
-#> EMODnet Workshop on mechanisms and guidelines
-#> to mobilise historical data into biogeogr
+#> Journal of Healthcare Engineering · Vol. 5 · No. 2 · 2014 Page 123–144                         123
 ```
 
 You can also use `crm_pdf()` to get PDF.
@@ -236,7 +229,7 @@ path <- system.file("examples", "MairChamberlain2014RJournal.pdf", package = "cr
 ```
 
 ```
-#> <document>/Library/Frameworks/R.framework/Versions/3.6/Resources/library/crminer/examples/MairChamberlain2014RJournal.pdf
+#> <document>/Library/Frameworks/R.framework/Versions/4.0/Resources/library/crminer/examples/MairChamberlain2014RJournal.pdf
 #>   Pages: 4
 #>   No. characters: 17358
 #>   Created: 2014-07-29
@@ -307,4 +300,4 @@ cat(substring(res$text[[1]], 1, 300))
 
 [![rofooter](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
 
-[coc]: https://github.com/ropensci/crminer/blob/master/CODE_OF_CONDUCT.md
+[coc]: https://github.com/ropensci/crminer/blob/master/.github/CODE_OF_CONDUCT.md
